@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, jsonify, request
 from flask_restful import Resource, Api
 from pdf2img import pdf2img
@@ -8,9 +7,9 @@ app = Flask(__name__)
 api = Api(app)
 
 
-@app.route('/', methods=['GET'])
-def hola():
-    return jsonify({"message": "Holaaaaa!!"})
+class Welcome(Resource):
+    def get(self):
+        return jsonify({"message": "Holaaaaa!!"})
 
 class ConvertPDF(Resource):
     def post(self):
@@ -24,6 +23,7 @@ class ConvertImg(Resource):
 
 api.add_resource(ConvertPDF, '/pdf2img')
 api.add_resource(ConvertImg, '/img2pdf')
+api.add_resource(Welcome, "/")
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000, debug=True)

@@ -8,7 +8,7 @@ pdf = FPDF()
 
 path_img2pdf = 'UNpdf/img2pdf/'
 
-image = "../test.jpg"
+image = "test.jpg"
 
 def img2pdf():
     if not os.path.exists(path_img2pdf):

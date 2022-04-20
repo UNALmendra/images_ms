@@ -15,7 +15,7 @@ from pdf2image.exceptions import(
 
 path_pdf2img = 'UNpdf/pdf2img/'
 
-file = '../test.pdf'
+file = 'test.pdf'
 
 def pdf2img():
 
