@@ -17,13 +17,13 @@ path_pdf2img = 'UNpdf/pdf2img/'
 
 file = 'test.pdf'
 
-def pdf2img():
+def pdf2img(firstPage = None, lastPage=None):
 
     if not os.path.exists(path_pdf2img):
         os.makedirs(path_pdf2img)
 
     
-    pages = convert_from_path(file, 500)
+    pages = convert_from_path(file, 500, first_page=firstPage, last_page=lastPage)
     counter = 1
     for page in pages:
         myfile = path_pdf2img + 'output' + str(counter) + '.jpg'

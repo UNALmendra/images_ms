@@ -13,16 +13,21 @@ class Welcome(Resource):
 
 class ConvertPDF(Resource):
     def post(self):
-        return 'Archivo convertido exitosamente. Imagen guardada en ' + pdf2img(), 201
+        return jsonify({"message": 'Archivo convertido exitosamente. Imagen guardada en ' + pdf2img()}), 201
+
+class ConvertPDFRange(Resource):
+    def post(self, firstPage, lastPage):
+        return jsonify({"message": 'Archivo convertido exitosamente. Imagen guardada en ' + pdf2img(firstPage, lastPage)})
 
 class ConvertImg(Resource):
     def post(self):
-        return 'Archivo convertido exitosamente. pdf guardado en ' + img2pdf(), 201
-
+        return jsonify({"message": 'Archivo convertido exitosamente. pdf guardado en ' + img2pdf()})
 
 
 api.add_resource(ConvertPDF, '/pdf2img')
+api.add_resource(ConvertPDFRange, '/pdf2img/<int:firstPage>-<int:lastPage>')
 api.add_resource(ConvertImg, '/img2pdf')
+
 api.add_resource(Welcome, "/")
 
 if __name__ == '__main__':
