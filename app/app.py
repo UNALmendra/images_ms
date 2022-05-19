@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_restful import Resource, Api
 
 from Logic.img2pdf import img2pdf
@@ -15,15 +15,22 @@ class Welcome(Resource):
 
 class ConvertPDF(Resource):
     def post(self):
-        return jsonify({"message": 'Archivo convertido exitosamente. Imagen guardada en ' + pdf2img()})
+        data = request.get_json()
+        print(data)
+        url  = data['url']
+        return jsonify({"file":  pdf2img(url)})
 
 class ConvertPDFRange(Resource):
     def post(self, firstPage, lastPage):
-        return jsonify({"message": 'Archivo convertido exitosamente. Imagen guardada en ' + pdf2img(firstPage, lastPage)})
+        data = request.get_json()
+        url  = data['url']
+        return jsonify({"file":  pdf2img(url, firstPage, lastPage)})
 
 class ConvertImg(Resource):
     def post(self):
-        return jsonify({"message": 'Archivo convertido exitosamente. pdf guardado en ' + img2pdf()})
+        data = request.get_json()
+        url  = data['url']
+        return jsonify({"file":  img2pdf(url)})
 
 
 api.add_resource(ConvertPDF, '/pdf2img')

@@ -1,5 +1,5 @@
 from fpdf import FPDF
-import os
+import os, base64
 
 pdf = FPDF()
 
@@ -8,9 +8,11 @@ pdf = FPDF()
 
 path_img2pdf = 'images_ms/UNpdf/img2pdf/'
 
-image = "images_ms/test.jpg"
 
-def img2pdf():
+def img2pdf(url: str):
+
+    image = url
+
     if not os.path.exists(path_img2pdf):
         os.makedirs(path_img2pdf)
 
@@ -19,4 +21,5 @@ def img2pdf():
 
     pdf.output(path_img2pdf+'output.pdf', 'F')
 
-    return path_img2pdf
+    with open(path_img2pdf+'output.pdf', 'rb') as pdf_file:
+        return str(base64.b64encode(pdf_file.read()))
