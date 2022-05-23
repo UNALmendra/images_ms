@@ -30,6 +30,8 @@ class ConvertImg(Resource):
     def post(self):
         data = request.get_json()
         url  = data['url']
+        url = url.replace(' ', '%20')
+        print(f'url = {url} {type(url)}')
         return jsonify({"file":  img2pdf(url)})
 
 
