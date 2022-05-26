@@ -37,7 +37,9 @@ def pdf2img(url: str, firstPage = None, lastPage=None):
         counter = counter + 1
         page.save(myfile, "JPEG")
         with open(myfile, 'rb') as image:
-            img_file.append(str(base64.b64encode(image.read())))
+            encodeFile = str(base64.b64encode(image.read()))
+            encodeFile = encodeFile[2:-1]
+            img_file.append(encodeFile)
 
 
     return str(img_file)
